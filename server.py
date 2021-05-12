@@ -1,7 +1,6 @@
 import socket
 # import threading
 
-# provided port and server IP in the README
 PORT = 1337
 IP = "127.0.0.1"
 
@@ -13,7 +12,10 @@ print("Server starting up...\n")
 server.bind(ADDR)
 
 # basic infinite loop to receive data from the sender
-while True:
-    print("Waiting to receive message...\n")
-    data, addr = server.recvfrom(1024)
+try:
+    print("Waiting to receive message.\n")
+    data, addr = server.recvfrom(64)
     print(f"Received message of length {len(data)}\n")
+    print(f"Message is: {str(data.decode())}")
+finally:
+    server.close()
